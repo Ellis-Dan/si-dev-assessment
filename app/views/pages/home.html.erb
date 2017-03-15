@@ -1,6 +1,29 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
-<%= form_tag("/sms/send", method: "post") do %>
-<!-- add form elements here -->
-<% end %>
+<body>
+    
+<div class="content">
+    <header></header>
+    <h1>Startup <span class="yellowtext">Institute</span> <br>Web Dev</h1>
+    <div class="center">
+        <div class=" divcenter">
+        <p>Please enter a verified phone number and any message you like to send.</p>
+        <br>
+        <br>
+        <%= form_tag("/sms/send", class:"label_tag textarea", method: "post") do %>
+        <!-- add form elements here -->
+            <%= label_tag(:q, "Send to") %><br>
+            <%= text_field_tag(:q) %> <br>
+            <br>
+            <br>
+            <br>
+            <%= label_tag(:d, "Message") %><br>
+            <%= text_area_tag(:d,"", :size => "50x10" ) %> <br>
+    
+            <%= submit_tag("Send") %>
+    
+        <% end %>
+        
+        </div>
+    </div>
+    <footer></footer>
+</div>
+</body>
