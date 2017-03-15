@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   end
 
   def sms
-    raise "Action sms in the UsersController is not implemented! received params #{params.to_json}"
+    @number = params[:q]
+    @message = params[:d]
   end
 end
