@@ -1,37 +1,28 @@
 class PagesController < ApplicationController
+  
   def home
   end
-  
-def twill
-  require 'twilio-ruby'
-  
-    @client = Twilio::REST::Client.new(
-      ENV[TWILIO_ACCOUNT_SID],
-      ENV[TWILIO_AUTH_TOKEN])
-    message1 = @client.account.messages.create(:body => "Hello from ruby",
-    :to => "7812344622",
-    :from =>"8574073135")
-  
-  puts message1.sid
-  
-end
 
   def sms
-    @number = params[:q]
+    @number = params[:q] #taking the number
     @message = params[:d]
+  
   
   require 'twilio-ruby'
   
-  account_sid= "AC9ace702bb5d2a2e7a1848a8bc03112a8"
-  auth_token = "ea2aaacff1c373fae94835898ba63077"
   
+  #this was my second attempt at environment variable my first used unix commands and .bashrc but ultimately
+  #was unable to get rid of a "unitialized constant" error message
+  
+  account_sid = ENV["TWILIO_ACCOUNT_ID"]  #environmental variables where made from figaro gem
+  auth_token = ENV["TWILIO_AUTHORIZE_TOKEN"] #these variables are found in the application.yml file
   
     @client = Twilio::REST::Client.new account_sid, auth_token
-    message1 = @client.account.messages.create(:body => @message,
-    :to => @number,
-    :from =>"8574073135")
+
+    message1 = @client.account.messages.create(:body => @message, #taking the message and phone parameters and using 
+    :to => @number,                                               #and using them as the text message itself and the recipient
+    :from =>"8574073135") #my authorized twilio number
   
   puts message1.sid
-    
   end
 end
